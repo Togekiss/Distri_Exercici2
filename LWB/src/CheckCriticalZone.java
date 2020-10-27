@@ -3,10 +3,10 @@ import java.util.ConcurrentModificationException;
 import java.util.LinkedList;
 
 public class CheckCriticalZone extends Thread {
-    private AnalogueComms analogueComms;
+    private AnalogueComms analogueCommsLWA;
 
-    public CheckCriticalZone(AnalogueComms analogueComms){
-        this.analogueComms = analogueComms;
+    public CheckCriticalZone(AnalogueComms analogueCommsLWA){
+        this.analogueCommsLWA = analogueCommsLWA;
     }
 
     @Override
@@ -17,12 +17,12 @@ public class CheckCriticalZone extends Thread {
                 synchronized (this) {
                     this.wait();
                 }
-                String tmstp = analogueComms.getProcess();
+                String tmstp = analogueCommsLWA.getProcess();
 
                 if (checkQueue(tmstp)) {
-                    analogueComms.useScreen();
+                    analogueCommsLWA.useScreen();
                     try {
-                        analogueComms.releaseProcess(tmstp);
+                        analogueCommsLWA.releaseProcess(tmstp);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -38,9 +38,9 @@ public class CheckCriticalZone extends Thread {
 
     private synchronized boolean checkQueue(String process) {
         boolean available = true;
-        int clock = analogueComms.getClock();
-        int id = analogueComms.getTheId();
-        LinkedList<LamportRequest> lamportQueue = analogueComms.getLamportQueue();
+        int clock = analogueCommsLWA.getClock();
+        int id = analogueCommsLWA.getTheId();
+        LinkedList<LamportRequest> lamportQueue = analogueCommsLWA.getLamportQueue();
 
         System.out.println("in: " + Thread.currentThread().getName());
 

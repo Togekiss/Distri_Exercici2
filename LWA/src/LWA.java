@@ -5,7 +5,7 @@ import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.Socket;
 
-public class S_LWA extends Thread {
+public class LWA extends Thread {
     private int OUTGOING_HWA_PORT;
     private int FIRST_OUTGOING_PORT;
     private int SECOND_OUTGOING_PORT;
@@ -15,20 +15,20 @@ public class S_LWA extends Thread {
     private DataInputStream diStreamHWA;
     private DataOutputStream doStreamHWA;
 
-    private AnalogueCommsLWA analogueCommsLWA;
+    private AnalogueComms analogueComms;
     private int id;
     private String className;
     private String lastExecuted;
 
-    public S_LWA(String className, int outgoingHwaPort, int myPort, int firstOutgoingPort, int secondOutgoingPort, String time_stamp_lwa, int id){
+    public LWA(String className, int outgoingHwaPort, int myPort, int firstOutgoingPort, int secondOutgoingPort, String time_stamp_lwa, int id){
         this.OUTGOING_HWA_PORT = outgoingHwaPort;
         this.FIRST_OUTGOING_PORT = firstOutgoingPort;
         this.SECOND_OUTGOING_PORT = secondOutgoingPort;
         this.id = id;
         this.className = className;
         this.TMSTP = time_stamp_lwa;
-        analogueCommsLWA = new AnalogueCommsLWA(this, myPort, time_stamp_lwa, id);
-        analogueCommsLWA.start();
+        analogueComms = new AnalogueComms(this, myPort, time_stamp_lwa, id);
+        analogueComms.start();
         lastExecuted = "";
     }
 
@@ -41,11 +41,11 @@ public class S_LWA extends Thread {
             boolean connect = diStreamHWA.readBoolean();
 
             if (connect){
-                DedicatedOutgoingSocket firstDedicatedOutgoing = new DedicatedOutgoingSocket(this, FIRST_OUTGOING_PORT, TMSTP, analogueCommsLWA, id);
+                DedicatedOutgoingSocket firstDedicatedOutgoing = new DedicatedOutgoingSocket(this, FIRST_OUTGOING_PORT, TMSTP, analogueComms, id);
                 firstDedicatedOutgoing.start();
-                DedicatedOutgoingSocket secondDedicatedOutgoing = new DedicatedOutgoingSocket(this, SECOND_OUTGOING_PORT, TMSTP, analogueCommsLWA, id);
+                DedicatedOutgoingSocket secondDedicatedOutgoing = new DedicatedOutgoingSocket(this, SECOND_OUTGOING_PORT, TMSTP, analogueComms, id);
                 secondDedicatedOutgoing.start();
-                analogueCommsLWA.registerDedicated(firstDedicatedOutgoing, secondDedicatedOutgoing);
+                analogueComms.registerDedicated(firstDedicatedOutgoing, secondDedicatedOutgoing);
 
                 //analogueCommsLWA.makeRequest();
             }

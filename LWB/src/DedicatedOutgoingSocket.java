@@ -11,17 +11,17 @@ public class DedicatedOutgoingSocket extends Thread {
     private DataInputStream diStream;
     private DataOutputStream doStream;
 
-    private AnalogueComms analogueComms;
+    private AnalogueComms analogueCommsLWA;
     private String process;
     private int clock;
     private int id;
 
-    public DedicatedOutgoingSocket(LWA _lwa, int outgoing_port, String tmstp, AnalogueComms analogueComms, int id) {
+    public DedicatedOutgoingSocket(LWB LWB, int outgoing_port, String tmstp, AnalogueComms analogueCommsLWA, int id) {
         OUTGOING_PORT = outgoing_port;
         process = tmstp;
-        this.analogueComms = analogueComms;
+        this.analogueCommsLWA = analogueCommsLWA;
         this.id = id;
-        clock = analogueComms.getClock();
+        clock = analogueCommsLWA.getClock();
 
         try {
             InetAddress iAddress = InetAddress.getLocalHost();
@@ -64,14 +64,14 @@ public class DedicatedOutgoingSocket extends Thread {
         doStream.writeUTF(process);
         //System.out.println("\t[SENDING] Timestamp: " + TMSTP);
 
-        clock = analogueComms.getClock();
+        clock = analogueCommsLWA.getClock();
         doStream.writeInt(clock);
         //System.out.println("\t[SENDING] Time: " + time);
 
         doStream.writeInt(id);
         //System.out.println("\t[SENDING] ID: " + id);
 
-        analogueComms.addToQueue(clock, process, id);
+        analogueCommsLWA.addToQueue(clock, process, id);
         //System.out.println("\t rip sending end?");
 
         if (OUTGOING_PORT == 55556){
@@ -98,7 +98,7 @@ public class DedicatedOutgoingSocket extends Thread {
         //System.out.println("\t[SENDER - RECEIVED] Timestamp[" + responseTime + "] and ID[" + firstId + "]");
         //System.out.println("\t[SENDER - RECEIVED] ID: " + firstId);
 
-        analogueComms.checkBothAnswers(process, clock, OUTGOING_PORT);
+        analogueCommsLWA.checkBothAnswers(process, clock, OUTGOING_PORT);
     }
 
     public void myNotify() {

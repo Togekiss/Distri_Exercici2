@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dc014dc3-a8cf-4ec0-8687-63fff6a5424a" name="Default Changelist" comment="" />
+    <list default="true" id="dc014dc3-a8cf-4ec0-8687-63fff6a5424a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HeavyWeightB/S_HWB.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HeavyWeightB/S_HWB.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChildCommsHWB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChildCommsHWB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DedicatedChildCommsHWB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DedicatedChildCommsHWB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/S_HWB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/S_HWB.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="CoverageViewManager">
-    <option name="myElementSize" value="221" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -30,9 +33,6 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
@@ -44,15 +44,15 @@
       <module />
       <method />
     </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <configuration name="HWB" type="Application" factoryName="Application" temporary="true">
+      <output_file path="$PROJECT_DIR$/../../../../test/TestOutput.txt" is_save="true" />
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="HeavyWeightB" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="main" />
-      <module name="HWB" />
+    <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -85,7 +85,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.main" />
+        <item itemvalue="Application.HWB" />
       </list>
     </recent_temporary>
   </component>
@@ -100,47 +100,100 @@
       <option name="presentableId" value="Default" />
       <updated>1576765950531</updated>
     </task>
+    <task id="LOCAL-00001" summary="Pas de token entre HWA i HWB implementat de forma ciclica.">
+      <created>1585839509828</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1585839509828</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Modificacions per a la comunicacio amb els fills fent que s'esperin un cop s'han acabat d'executar.">
+      <created>1589277410967</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1589277410967</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Moficat el HWB per a que es comporti com HWA, amb les mateixes comunicacions i caracteristiques. Pendent de que el HWB inicii els seus fills al rebre el token de HWA, evitant que els fill s'iniciin al estar tots conectats com LWA ja que si no es solapen al començar (tot i que al acabar respecten el token).">
+      <created>1589394616518</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1589394616518</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Pas de token entre HWA i HWB implementat de forma ciclica." />
+    <MESSAGE value="Modificacions per a la comunicacio amb els fills fent que s'esperin un cop s'han acabat d'executar." />
+    <MESSAGE value="Moficat el HWB per a que es comporti com HWA, amb les mateixes comunicacions i caracteristiques. Pendent de que el HWB inicii els seus fills al rebre el token de HWA, evitant que els fill s'iniciin al estar tots conectats com LWA ja que si no es solapen al començar (tot i que al acabar respecten el token)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Moficat el HWB per a que es comporti com HWA, amb les mateixes comunicacions i caracteristiques. Pendent de que el HWB inicii els seus fills al rebre el token de HWA, evitant que els fill s'iniciin al estar tots conectats com LWA ja que si no es solapen al començar (tot i que al acabar respecten el token)." />
+  </component>
   <component name="WindowStateProjectService">
-    <state width="1493" height="222" key="GridCell.Tab.0.bottom" timestamp="1603820348943">
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589276511152">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="222" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1603820348943" />
-    <state width="1493" height="222" key="GridCell.Tab.0.center" timestamp="1603820348943">
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1589276511152" />
+    <state x="337" y="0" key="CommitChangelistDialog2" timestamp="1589394615077">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="222" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1603820348943" />
-    <state width="1493" height="222" key="GridCell.Tab.0.left" timestamp="1603820348942">
+    <state x="337" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1589394615077" />
+    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1585729741835">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="222" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1603820348942" />
-    <state width="1493" height="222" key="GridCell.Tab.0.right" timestamp="1603820348943">
+    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1585729741835" />
+    <state width="1493" height="306" key="GridCell.Tab.0.bottom" timestamp="1589883791191">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="222" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1603820348943" />
-    <state width="1493" height="252" key="GridCell.Tab.1.bottom" timestamp="1603742555450">
+    <state width="1493" height="306" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589883791191" />
+    <state width="1493" height="306" key="GridCell.Tab.0.center" timestamp="1589883791191">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="252" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1603742555450" />
-    <state width="1493" height="252" key="GridCell.Tab.1.center" timestamp="1603742555450">
+    <state width="1493" height="306" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1589883791191" />
+    <state width="1493" height="306" key="GridCell.Tab.0.left" timestamp="1589883791191">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="252" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1603742555450" />
-    <state width="1493" height="252" key="GridCell.Tab.1.left" timestamp="1603742555446">
+    <state width="1493" height="306" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1589883791191" />
+    <state width="1493" height="306" key="GridCell.Tab.0.right" timestamp="1589883791191">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="252" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1603742555446" />
-    <state width="1493" height="252" key="GridCell.Tab.1.right" timestamp="1603742555450">
+    <state width="1493" height="306" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1589883791191" />
+    <state width="1493" height="252" key="GridCell.Tab.1.bottom" timestamp="1589583644138">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="252" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1603742555450" />
-    <state x="249" y="0" key="SettingsEditor" timestamp="1603820879339">
+    <state width="1493" height="252" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589583644138" />
+    <state width="1493" height="252" key="GridCell.Tab.1.center" timestamp="1589583644138">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1603820879339" />
+    <state width="1493" height="252" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1589583644138" />
+    <state width="1493" height="252" key="GridCell.Tab.1.left" timestamp="1589583644138">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="252" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1589583644138" />
+    <state width="1493" height="252" key="GridCell.Tab.1.right" timestamp="1589583644138">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="252" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1589583644138" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1589394620869">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1589394620869" />
+    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589394548219">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1589394548219" />
+    <state x="478" y="147" width="579" height="534" key="find.popup" timestamp="1589823999857">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="478" y="147" width="579" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1589823999857" />
+    <state x="209" y="33" key="new project wizard" timestamp="1585729745288">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="209" y="33" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1585729745288" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/HeavyWeightB$main.ic" NAME="main Coverage Results" MODIFIED="1585824568360" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/HeavyWeightB$HWB.ic" NAME="HWB Coverage Results" MODIFIED="1589276406671" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

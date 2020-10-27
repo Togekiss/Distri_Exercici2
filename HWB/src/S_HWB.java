@@ -16,6 +16,13 @@ public class S_HWB extends Thread{
     private DataOutputStream doStream;
     private Socket outSocket;
 
+    private ChildCommsHWB childCommsHWB;
+
+    public S_HWB(){
+        childCommsHWB = new ChildCommsHWB(this);
+        childCommsHWB.start();
+    }
+
     private void handShake() {
         try {
             String read = diStream.readUTF();
@@ -27,22 +34,28 @@ public class S_HWB extends Thread{
     }
 
     @Override
-    public void run() {
+    public synchronized void run() {
         createIncomeConnection();
         createOutcomeConnection();
         //handShake();
+        System.out.println("Waiting for childs to connect...\n");
+       /* try {
+            this.wait();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
         while (true){
             readFromHWA();
-            writeToHWA();
         }
     }
 
     private void readFromHWA() {
         try {
+            System.out.println("Waiting for a message from HWA...");
             String read = diStream.readUTF();
             if (read.equals(TOKEN_A)) {
                 System.out.println("I'm B. I received the following message: " + read);
-                //childLabour();
+                childCommsHWB.childsWork();
             }else {
                 readFromHWA();
             }
@@ -53,7 +66,7 @@ public class S_HWB extends Thread{
 
     private void writeToHWA() {
         try {
-            System.out.println("writing to A");
+            System.out.println("Writing token to A");
             doStream.writeUTF(TOKEN_B);
         } catch (IOException e) {
             e.printStackTrace();
@@ -92,5 +105,15 @@ public class S_HWB extends Thread{
                 }
             }
         }
+    }
+
+    public void myNotify() {
+        synchronized (this){
+            this.notify();
+        }
+    }
+
+    public void notifyHWA() {
+        writeToHWA();
     }
 }

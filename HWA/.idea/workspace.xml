@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0f9f9d02-81b1-444c-ae79-7c45ded016d7" name="Default Changelist" comment="" />
+    <list default="true" id="0f9f9d02-81b1-444c-ae79-7c45ded016d7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../LWB/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../LWB/.idea/dbnavigator.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../LWB/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../LWB/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../LWB/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../LWB/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HWB/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../HWB/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HWB/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../HWB/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWA/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../LWA/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWA/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../LWA/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWA/src/AnalogueCommsLWA.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LWA/src/AnalogueComms.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWA/src/CheckCriticalZone.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LWA/src/CheckCriticalZone.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWA/src/DedicatedIncomingSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LWA/src/DedicatedIncomingSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWA/src/DedicatedOutgoingSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LWA/src/DedicatedOutgoingSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWA/src/S_LWA.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LWA/src/LWA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWA/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LWA/src/main.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,7 +32,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1T6TQygBAL2bC8oN6M0NHjkBB7p" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -24,9 +41,10 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Distribuides_Sessio2_LWA-47f5ec4c0af29094b1923b64c91d61c0743d073f" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -52,8 +70,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MainProcessA" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MainProcessA" />
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="HWA" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2">

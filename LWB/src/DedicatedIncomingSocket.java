@@ -16,9 +16,9 @@ public class DedicatedIncomingSocket implements Runnable {
     private final AnalogueComms parent;
     private int id;
 
-    public DedicatedIncomingSocket(Socket socket, AnalogueComms analogueComms, int id) {
+    public DedicatedIncomingSocket(Socket socket, AnalogueComms analogueCommsLWA, int id) {
         this.socket = socket;
-        this.parent = analogueComms;
+        this.parent = analogueCommsLWA;
         this.id = id;
     }
 

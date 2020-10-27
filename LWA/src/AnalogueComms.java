@@ -4,9 +4,9 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class AnalogueCommsLWA extends Thread {
+public class AnalogueComms extends Thread {
     private int MY_PORT;
-    private final S_LWA s_lwa;
+    private final LWA _lwa;
     private String time_stamp_lwa;
     private final ArrayList<Thread> dedicatedThreadList;
     private LinkedList<LamportRequest> lamportQueue;
@@ -21,9 +21,9 @@ public class AnalogueCommsLWA extends Thread {
     private CheckCriticalZone checkCriticalZone;
     private int clock;
 
-    public AnalogueCommsLWA(S_LWA s_lwa, int myPort, String time_stamp_lwa, int id) {
+    public AnalogueComms(LWA _lwa, int myPort, String time_stamp_lwa, int id) {
         this.MY_PORT = myPort;
-        this.s_lwa = s_lwa;
+        this._lwa = _lwa;
         this.time_stamp_lwa = time_stamp_lwa;
         this.id = id;
         dedicatedThreadList = new ArrayList<>();
@@ -224,7 +224,7 @@ public class AnalogueCommsLWA extends Thread {
     }
 
     public void useScreen(){
-        s_lwa.useScreen();
+        _lwa.useScreen();
         clock++;
     }
 }
