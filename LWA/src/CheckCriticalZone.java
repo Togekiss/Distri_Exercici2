@@ -42,19 +42,9 @@ public class CheckCriticalZone extends Thread {
         int id = analogueComms.getTheId();
         LinkedList<LamportRequest> lamportQueue = analogueComms.getLamportQueue();
 
-        System.out.println("in: " + Thread.currentThread().getName());
-
-//        synchronized (lamportQueue){
-
         try{
-           /* for (LamportRequest lr : lamportQueue) {
-                System.out.println("[LAMPORT (query)]" + lr.toString());
-            }
-*/
-
             System.out.println("Cheking access to CS. My process: " + process + "; My clock: " + clock + "; My id: " + id);
             for (LamportRequest lr : lamportQueue) {
-           //     System.out.println("[LAMPORT (query conditionals)]" + lr.toString());
                 if (!lr.getProcess().equals(process)) {
                     if (lr.getClock() < clock) {
                         available = false;
@@ -67,9 +57,6 @@ public class CheckCriticalZone extends Thread {
             System.err.println("in catch: " + Thread.currentThread().getName());
             e.printStackTrace();
         }
-
-
-  //      }
         return available;
     }
 

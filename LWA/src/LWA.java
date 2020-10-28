@@ -18,7 +18,6 @@ public class LWA extends Thread {
     private AnalogueComms analogueComms;
     private int id;
     private String className;
-    private String lastExecuted;
 
     public LWA(String className, int outgoingHwaPort, int myPort, int firstOutgoingPort, int secondOutgoingPort, String time_stamp_lwa, int id){
         this.OUTGOING_HWA_PORT = outgoingHwaPort;
@@ -29,7 +28,6 @@ public class LWA extends Thread {
         this.TMSTP = time_stamp_lwa;
         analogueComms = new AnalogueComms(this, myPort, time_stamp_lwa, id);
         analogueComms.start();
-        lastExecuted = "";
     }
 
     @Override
@@ -46,8 +44,6 @@ public class LWA extends Thread {
                 DedicatedOutgoingSocket secondDedicatedOutgoing = new DedicatedOutgoingSocket(this, SECOND_OUTGOING_PORT, TMSTP, analogueComms, id);
                 secondDedicatedOutgoing.start();
                 analogueComms.registerDedicated(firstDedicatedOutgoing, secondDedicatedOutgoing);
-
-                //analogueCommsLWA.makeRequest();
             }
         } catch (ConnectException ignored) {
         } catch (IOException e) {
@@ -56,7 +52,6 @@ public class LWA extends Thread {
     }
 
     public synchronized void useScreen() {
-        lastExecuted = TMSTP;
         for (int i = 0; i < 10; i++){
             System.out.println("\tSoc el procés lightweight " + TMSTP);
             try {
@@ -74,25 +69,6 @@ public class LWA extends Thread {
             e.printStackTrace();
         }
         System.out.println("finished useScreen?");
-        /*
-        if (className.equals("LWA3")){
-            try {
-                doStreamHWA.writeUTF("LWA DONE");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            System.out.println("waiting for test read");
-            try {
-                String aux = diStreamHWA.readUTF();
-                System.out.println("I read: " + aux);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            //analogueCommsLWA.stopLWA();
-        }
-        System.out.println("finished useScreen?");
-
-         */
     }
 
 
@@ -104,10 +80,6 @@ public class LWA extends Thread {
         socketHWA = new Socket(String.valueOf(IP), OUTGOING_HWA_PORT);
         doStreamHWA = new DataOutputStream(socketHWA.getOutputStream());
         diStreamHWA = new DataInputStream(socketHWA.getInputStream());
-    }
-
-    public String getLastExecuted() {
-        return lastExecuted;
     }
 
     public void waitForResume() {

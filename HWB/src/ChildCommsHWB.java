@@ -68,7 +68,7 @@ public class ChildCommsHWB extends Thread {
     }
 
     private void childsDone() {
-        parent.notifyHWB();
+        parent.myNotify();
     }
 
     public void childsWork() {

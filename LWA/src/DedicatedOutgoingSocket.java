@@ -98,7 +98,7 @@ public class DedicatedOutgoingSocket extends Thread {
         //System.out.println("\t[SENDER - RECEIVED] Timestamp[" + responseTime + "] and ID[" + firstId + "]");
         //System.out.println("\t[SENDER - RECEIVED] ID: " + firstId);
 
-        analogueComms.checkBothAnswers(process, clock, OUTGOING_PORT);
+        analogueComms.checkBothAnswers(process, this.clock, OUTGOING_PORT);
     }
 
     public void myNotify() {

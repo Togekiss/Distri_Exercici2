@@ -113,8 +113,4 @@ public class S_HWB extends Thread{
             this.notify();
         }
     }
-
-    public void notifyHWB() {
-        writeToHWA();
-    }
 }

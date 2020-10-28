@@ -18,8 +18,8 @@ public class AnalogueComms extends Thread {
 
     private String process;
     private int id;
-    private CheckCriticalZone checkCriticalZone;
     private int clock;
+    private CheckCriticalZone checkCriticalZone;
 
     public AnalogueComms(LWA lwa, int myPort, String time_stamp_lwa, int id) {
         this.MY_PORT = myPort;
@@ -170,7 +170,6 @@ public class AnalogueComms extends Thread {
     }
 
     public synchronized void checkBothAnswers(String process, int clock, int OUTGOING_PORT) {
-        addToQueue(clock, process, id);
         if (!gotAnswer){
             if (OUTGOING_PORT == 55556){
                 System.out.println("\tRECEIVING first response");
@@ -195,10 +194,8 @@ public class AnalogueComms extends Thread {
 
             //second answer. Must check queue
             System.out.println("\tGot both answers. Checking queue");
-            //setRequestData(TMSTP, requestTime);
             this.process = process;
             this.clock = clock;
-            //checkCSAvailability();
             myNotify();
             //reset answer flag
             gotAnswer = false;

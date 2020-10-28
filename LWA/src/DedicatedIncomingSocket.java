@@ -68,9 +68,8 @@ public class DedicatedIncomingSocket implements Runnable {
                 }else {
                     System.out.println("\t\t\t\tAnswer to LWA3 done.");
                 }
-
-                //parent.checkFullQueue();
                 break;
+
             case "RELEASE":
                 String releaseProcess = diStream.readUTF();
                 System.out.println("\t\t\t\tReleasing process " + releaseProcess +  "...");

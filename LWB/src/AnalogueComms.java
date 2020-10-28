@@ -93,7 +93,6 @@ public class AnalogueComms extends Thread {
     }
 
     public synchronized void gotAnswer(String process, int clock) {
-        addToQueue(clock, process, id);
         this.process = process;
         this.clock = clock;
         System.out.println("\tGot answer. Checking queue");
