@@ -65,6 +65,16 @@ public class LWA extends Thread {
                 e.printStackTrace();
             }
         }
+
+        try {
+            doStreamHWA.writeUTF("LWA DONE");
+            doStreamHWA.writeUTF(className);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("finished useScreen?");
+        /*
         if (className.equals("LWA3")){
             try {
                 doStreamHWA.writeUTF("LWA DONE");
@@ -81,6 +91,8 @@ public class LWA extends Thread {
             //analogueCommsLWA.stopLWA();
         }
         System.out.println("finished useScreen?");
+
+         */
     }
 
 
@@ -96,5 +108,15 @@ public class LWA extends Thread {
 
     public String getLastExecuted() {
         return lastExecuted;
+    }
+
+    public void waitForResume() {
+        try {
+            System.out.println("waiting for HWA's response to resume");
+            String aux = diStreamHWA.readUTF();
+            System.out.println("I read: " + aux);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

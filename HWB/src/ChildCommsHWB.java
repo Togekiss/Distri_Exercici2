@@ -18,10 +18,8 @@ public class ChildCommsHWB extends Thread {
     private final static String LWB2 = "LWB2";
 
     public ChildCommsHWB(S_HWB s_hwb) {
-        LWB1Online = false;
-        LWB2Online = false;
-        LWB1Executed = false;
-        LWB2Executed = false;
+        LWB1Online = LWB2Online = false;
+        LWB1Executed = LWB2Executed = false;
         dedicatedChildCommsList = new ArrayList<>();
         this.parent = s_hwb;
     }
@@ -70,11 +68,10 @@ public class ChildCommsHWB extends Thread {
     }
 
     private void childsDone() {
-        parent.notifyHWA();
+        parent.notifyHWB();
     }
 
     public void childsWork() {
-        LWB1Executed = LWB2Executed = false;
         for (DedicatedChildCommsHWB dedicatedChild : dedicatedChildCommsList) {
             dedicatedChild.work();
         }
@@ -95,6 +92,7 @@ public class ChildCommsHWB extends Thread {
         }
         if (LWB1Executed && LWB2Executed){
             childsDone();
+            LWB1Executed = LWB2Executed = false;
         }
     }
 

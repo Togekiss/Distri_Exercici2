@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 public class AnalogueComms extends Thread {
     private int MY_PORT;
-    private final LWA _lwa;
+    private final LWA lwa;
     private String time_stamp_lwa;
     private final ArrayList<Thread> dedicatedThreadList;
     private LinkedList<LamportRequest> lamportQueue;
@@ -21,9 +21,9 @@ public class AnalogueComms extends Thread {
     private CheckCriticalZone checkCriticalZone;
     private int clock;
 
-    public AnalogueComms(LWA _lwa, int myPort, String time_stamp_lwa, int id) {
+    public AnalogueComms(LWA lwa, int myPort, String time_stamp_lwa, int id) {
         this.MY_PORT = myPort;
-        this._lwa = _lwa;
+        this.lwa = lwa;
         this.time_stamp_lwa = time_stamp_lwa;
         this.id = id;
         dedicatedThreadList = new ArrayList<>();
@@ -110,6 +110,7 @@ public class AnalogueComms extends Thread {
 */
     public synchronized void addToQueue(int clock, String process, int id) {
         LamportRequest request = new LamportRequest(clock, process, id);
+        System.out.println("\t\t\t\t adding: " + request);
         boolean found = false;
         for (LamportRequest lr : lamportQueue){
             if (lr.getProcess().equals(process)){
@@ -150,6 +151,7 @@ public class AnalogueComms extends Thread {
         releaseRequest(tmstp);
         firstDedicatedOutgoing.myNotify();
         secondDedicatedOutgoing.myNotify();
+        lwa.waitForResume();
     }
 
     public void registerDedicated(DedicatedOutgoingSocket firstDedicatedOutgoing, DedicatedOutgoingSocket secondDedicatedOutgoing) {
@@ -224,7 +226,7 @@ public class AnalogueComms extends Thread {
     }
 
     public void useScreen(){
-        _lwa.useScreen();
+        lwa.useScreen();
         clock++;
     }
 }

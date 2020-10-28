@@ -16,9 +16,9 @@ public class DedicatedIncomingSocket implements Runnable {
     private final AnalogueComms parent;
     private int id;
 
-    public DedicatedIncomingSocket(Socket socket, AnalogueComms analogueCommsLWA, int id) {
+    public DedicatedIncomingSocket(Socket socket, AnalogueComms analogueComms, int id) {
         this.socket = socket;
-        this.parent = analogueCommsLWA;
+        this.parent = analogueComms;
         this.id = id;
     }
 
@@ -60,17 +60,8 @@ public class DedicatedIncomingSocket implements Runnable {
                 clock = getMyRequestedClock(process);
                 doStream.writeInt(clock);
                 doStream.writeInt(this.id);
-
-                if (process.equals("TIME_STAMP_LWA1")){
-                    System.out.println("\t\t\t\tAnswer to LWA1 done.");
-                }else  if (process.equals("TIME_STAMP_LWA2")){
-                    System.out.println("\t\t\t\tAnswer to LWA2 done.");
-                }else {
-                    System.out.println("\t\t\t\tAnswer to LWA3 done.");
-                }
-
-                //parent.checkFullQueue();
                 break;
+
             case "RELEASE":
                 String releaseProcess = diStream.readUTF();
                 System.out.println("\t\t\t\tReleasing process " + releaseProcess +  "...");

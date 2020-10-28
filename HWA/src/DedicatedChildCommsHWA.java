@@ -48,9 +48,14 @@ public class DedicatedChildCommsHWA extends Thread{
                 interconnectChilds(childName);
                 break;
             case "LWA DONE":
+                childName = diStream.readUTF();
+                System.out.println("notify done in HWA from " + childName);
+                parent.setChildDone(childName);
+                /*
                 System.out.println("notify done in HWA from LWA.");
                 parent.childsDone();
 
+                 */
                 break;
         }
     }

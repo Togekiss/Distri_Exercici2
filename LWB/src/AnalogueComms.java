@@ -5,10 +5,9 @@ import java.util.LinkedList;
 
 public class AnalogueComms extends Thread {
     private int MY_PORT;
-    private final LWB LWB;
+    private final LWB lwb;
     private String time_stamp_lwb;
     private LinkedList<LamportRequest> lamportQueue;
-    private boolean gotAnswer;
 
     private DedicatedOutgoingSocket dedicatedOutgoing;
     private DedicatedIncomingSocket dedicatedLWB;
@@ -18,13 +17,12 @@ public class AnalogueComms extends Thread {
     private CheckCriticalZone checkCriticalZone;
     private int clock;
 
-    public AnalogueComms(LWB LWB, int myPort, String time_stamp_lwb, int id) {
+    public AnalogueComms(LWB lwb, int myPort, String time_stamp_lwb, int id) {
         this.MY_PORT = myPort;
-        this.LWB = LWB;
+        this.lwb = lwb;
         this.time_stamp_lwb = time_stamp_lwb;
         this.id = id;
         lamportQueue = new LinkedList<>();
-        gotAnswer = false;
         this.checkCriticalZone = new CheckCriticalZone(this);
         checkCriticalZone.start();
         this.clock = 0;
@@ -77,6 +75,7 @@ public class AnalogueComms extends Thread {
         dedicatedOutgoing.releaseCS(tmstp);
         releaseRequest(tmstp);
         dedicatedOutgoing.myNotify();
+        lwb.waitForResume();
     }
 
     public void registerDedicated(DedicatedOutgoingSocket dedicatedOutgoing) {
@@ -93,40 +92,12 @@ public class AnalogueComms extends Thread {
         }
     }
 
-    public synchronized void checkBothAnswers(String process, int clock, int OUTGOING_PORT) {
+    public synchronized void gotAnswer(String process, int clock) {
         addToQueue(clock, process, id);
-        if (!gotAnswer){
-            if (OUTGOING_PORT == 55556){
-                System.out.println("\tRECEIVING first response");
-                System.out.println("\tRECEIVING request response from TIME_STAMP_LWA2");
-            }else  if (OUTGOING_PORT == 55557){
-                System.out.println("\tRECEIVING request response from TIME_STAMP_LWA3");
-            }else  if (OUTGOING_PORT == 55555){
-                System.out.println("\tRECEIVING request response from TIME_STAMP_LWA1");
-            }
-
-            //first answer. change flag
-            gotAnswer = true;
-        }else {
-            System.out.println("\tRECEIVING second response");
-            if (OUTGOING_PORT == 55556){
-                System.out.println("\tRECEIVING request response from TIME_STAMP_LWA2");
-            }else  if (OUTGOING_PORT == 55557){
-                System.out.println("\tRECEIVING request response from TIME_STAMP_LWA3");
-            }else  if (OUTGOING_PORT == 55555){
-                System.out.println("\tRECEIVING request response from TIME_STAMP_LWA1");
-            }
-
-            //second answer. Must check queue
-            System.out.println("\tGot both answers. Checking queue");
-            //setRequestData(TMSTP, requestTime);
-            this.process = process;
-            this.clock = clock;
-            //checkCSAvailability();
-            myNotify();
-            //reset answer flag
-            gotAnswer = false;
-        }
+        this.process = process;
+        this.clock = clock;
+        System.out.println("\tGot answer. Checking queue");
+        myNotify();
     }
 
     public void myNotify() {
@@ -150,7 +121,7 @@ public class AnalogueComms extends Thread {
     }
 
     public void useScreen(){
-        LWB.useScreen();
+        lwb.useScreen();
         clock++;
     }
 }

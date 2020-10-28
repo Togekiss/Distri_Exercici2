@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class LWB extends Thread {
     private int OUTGOING_HWB_PORT;
@@ -18,12 +19,15 @@ public class LWB extends Thread {
     private int id;
     private String className;
 
+    private ArrayList<DedicatedOutgoingSocket> dedicatedOutgoingSocketArrayList;
+
     public LWB(String className, int outgoingHwbPort, int myPort, int outgoingPort, String time_stamp_lwb, int id){
         this.OUTGOING_HWB_PORT = outgoingHwbPort;
         this.OUTGOING_PORT = outgoingPort;
         this.id = id;
         this.className = className;
         this.TMSTP = time_stamp_lwb;
+        dedicatedOutgoingSocketArrayList = new ArrayList<>();
         analogueComms = new AnalogueComms(this, myPort, time_stamp_lwb, id);
         analogueComms.start();
     }
@@ -39,10 +43,18 @@ public class LWB extends Thread {
             if (connect){
                 DedicatedOutgoingSocket dedicatedOutgoing = new DedicatedOutgoingSocket(this, OUTGOING_PORT, TMSTP, analogueComms, id);
                 dedicatedOutgoing.start();
+                dedicatedOutgoingSocketArrayList.add(dedicatedOutgoing);
                 analogueComms.registerDedicated(dedicatedOutgoing);
-
             }
-        } catch (ConnectException ignored) {
+            String message = diStreamHWB.readUTF();
+
+            if (message.equals("WORK")){
+                System.out.println("Got work");
+                for (DedicatedOutgoingSocket dedicatedOut : dedicatedOutgoingSocketArrayList) {
+                    dedicatedOut.myNotify();
+                }
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -57,19 +69,12 @@ public class LWB extends Thread {
                 e.printStackTrace();
             }
         }
-        if (className.equals("LWA3")){
-            try {
-                doStreamHWB.writeUTF("LWA DONE");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            System.out.println("waiting for test read");
-            try {
-                String aux = diStreamHWB.readUTF();
-                System.out.println("I read: " + aux);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+        try {
+            doStreamHWB.writeUTF("LWB DONE");
+            doStreamHWB.writeUTF(className);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         System.out.println("finished useScreen?");
     }
@@ -83,5 +88,15 @@ public class LWB extends Thread {
         socketHWB = new Socket(String.valueOf(IP), OUTGOING_HWB_PORT);
         doStreamHWB = new DataOutputStream(socketHWB.getOutputStream());
         diStreamHWB = new DataInputStream(socketHWB.getInputStream());
+    }
+
+    public void waitForResume() {
+        try {
+            System.out.println("waiting for HWB's response to resume");
+            String aux = diStreamHWB.readUTF();
+            System.out.println("I read: " + aux);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

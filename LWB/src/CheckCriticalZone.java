@@ -3,10 +3,10 @@ import java.util.ConcurrentModificationException;
 import java.util.LinkedList;
 
 public class CheckCriticalZone extends Thread {
-    private AnalogueComms analogueCommsLWA;
+    private AnalogueComms analogueComms;
 
-    public CheckCriticalZone(AnalogueComms analogueCommsLWA){
-        this.analogueCommsLWA = analogueCommsLWA;
+    public CheckCriticalZone(AnalogueComms analogueComms){
+        this.analogueComms = analogueComms;
     }
 
     @Override
@@ -17,12 +17,12 @@ public class CheckCriticalZone extends Thread {
                 synchronized (this) {
                     this.wait();
                 }
-                String tmstp = analogueCommsLWA.getProcess();
+                String tmstp = analogueComms.getProcess();
 
                 if (checkQueue(tmstp)) {
-                    analogueCommsLWA.useScreen();
+                    analogueComms.useScreen();
                     try {
-                        analogueCommsLWA.releaseProcess(tmstp);
+                        analogueComms.releaseProcess(tmstp);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -38,19 +38,13 @@ public class CheckCriticalZone extends Thread {
 
     private synchronized boolean checkQueue(String process) {
         boolean available = true;
-        int clock = analogueCommsLWA.getClock();
-        int id = analogueCommsLWA.getTheId();
-        LinkedList<LamportRequest> lamportQueue = analogueCommsLWA.getLamportQueue();
+        int clock = analogueComms.getClock();
+        int id = analogueComms.getTheId();
+        LinkedList<LamportRequest> lamportQueue = analogueComms.getLamportQueue();
 
         System.out.println("in: " + Thread.currentThread().getName());
 
-//        synchronized (lamportQueue){
-
         try{
-           /* for (LamportRequest lr : lamportQueue) {
-                System.out.println("[LAMPORT (query)]" + lr.toString());
-            }
-*/
 
             System.out.println("Cheking access to CS. My process: " + process + "; My clock: " + clock + "; My id: " + id);
             for (LamportRequest lr : lamportQueue) {
@@ -67,9 +61,6 @@ public class CheckCriticalZone extends Thread {
             System.err.println("in catch: " + Thread.currentThread().getName());
             e.printStackTrace();
         }
-
-
-  //      }
         return available;
     }
 

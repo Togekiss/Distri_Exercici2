@@ -39,13 +39,13 @@ public class S_HWA implements Runnable {
         createIncomeConnection();
         //handShake();
         while (true){
-            writeToHWB();
             readFromHWB();
             try {
                 this.wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            writeToHWB();
         }
     }
 
@@ -54,7 +54,7 @@ public class S_HWA implements Runnable {
             String read = diStream.readUTF();
             if (read.equals(TOKEN_B)) {
                 System.out.println("I'm A (work time for me). I received the following message: " + read);
-                childWork();
+                childCommsHWA.childsWork();
             }else {
                 readFromHWB();
             }
@@ -63,12 +63,9 @@ public class S_HWA implements Runnable {
         }
     }
 
-    private void childWork() {
-        childCommsHWA.childsWork();
-    }
-
     public void writeToHWB() {
         try {
+            System.out.println("Sending token to B.");
             doStream.writeUTF(TOKEN_A);
         } catch (IOException e) {
             e.printStackTrace();

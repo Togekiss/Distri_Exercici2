@@ -39,13 +39,15 @@ public class S_HWB extends Thread{
         createOutcomeConnection();
         //handShake();
         System.out.println("Waiting for childs to connect...\n");
-       /* try {
-            this.wait();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
+
         while (true){
+            writeToHWA();
             readFromHWA();
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -77,9 +79,8 @@ public class S_HWB extends Thread{
         try {
             //creem el nostre socket
             ServerSocket serverSocket = new ServerSocket(INCOME_PORT);
-            //esperem a la conexio del HeavyWeight_B
+            //esperem a la conexio del HeavyWeight_A
             Socket incomeSocket = serverSocket.accept();
-            // generaNouServidorDedicat(incomeSocket);
             diStream = new DataInputStream(incomeSocket.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
@@ -113,7 +114,7 @@ public class S_HWB extends Thread{
         }
     }
 
-    public void notifyHWA() {
+    public void notifyHWB() {
         writeToHWA();
     }
 }

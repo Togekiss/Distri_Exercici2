@@ -28,6 +28,7 @@ public class DedicatedChildCommsHWB extends Thread{
 
         while (true){
             try {
+                System.out.println("Waiting to read request...");
                 String request = diStream.readUTF();
                 actOnRequest(request);
             } catch (SocketException se){
@@ -65,8 +66,7 @@ public class DedicatedChildCommsHWB extends Thread{
 
     public void connectToAnalogues() {
         try {
-            doStream.writeUTF("CONNECT");
-            //parent.myNotify();
+            doStream.writeBoolean(true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -74,8 +74,8 @@ public class DedicatedChildCommsHWB extends Thread{
 
     public void work() {
         try {
-            System.out.println("Sending false to my childs");
-            doStream.writeBoolean(false);
+            System.out.println("Sending work");
+            doStream.writeUTF("WORK");
         } catch (IOException e) {
             e.printStackTrace();
         }

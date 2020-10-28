@@ -2,16 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="52cf3c25-ed40-4cec-998f-403f3133977c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../LWB/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../LWB/.idea/dbnavigator.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../LWB/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../LWB/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../LWB/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../LWB/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HWA/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../HWA/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../HWA/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../HWA/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HWB/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../HWB/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HWA/src/ChildCommsHWA.java" beforeDir="false" afterPath="$PROJECT_DIR$/../HWA/src/ChildCommsHWA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HWA/src/DedicatedChildCommsHWA.java" beforeDir="false" afterPath="$PROJECT_DIR$/../HWA/src/DedicatedChildCommsHWA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HWA/src/S_HWA.java" beforeDir="false" afterPath="$PROJECT_DIR$/../HWA/src/S_HWA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../HWB/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../HWB/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HWB/out/production/HeavyWeightB/S_HWB.class" beforeDir="false" afterPath="$PROJECT_DIR$/../HWB/out/production/HeavyWeightB/S_HWB.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HWB/out/production/HeavyWeightB/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../HWB/out/production/HeavyWeightB/main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HWB/src/ChildCommsHWB.java" beforeDir="false" afterPath="$PROJECT_DIR$/../HWB/src/ChildCommsHWB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HWB/src/DedicatedChildCommsHWB.java" beforeDir="false" afterPath="$PROJECT_DIR$/../HWB/src/DedicatedChildCommsHWB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HWB/src/S_HWB.java" beforeDir="false" afterPath="$PROJECT_DIR$/../HWB/src/S_HWB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWB/out/production/LWB/AnalogueComms.class" beforeDir="false" afterPath="$PROJECT_DIR$/../LWB/out/production/LWB/AnalogueComms.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWB/out/production/LWB/CheckCriticalZone.class" beforeDir="false" afterPath="$PROJECT_DIR$/../LWB/out/production/LWB/CheckCriticalZone.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWB/out/production/LWB/DedicatedIncomingSocket.class" beforeDir="false" afterPath="$PROJECT_DIR$/../LWB/out/production/LWB/DedicatedIncomingSocket.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWB/out/production/LWB/DedicatedOutgoingSocket.class" beforeDir="false" afterPath="$PROJECT_DIR$/../LWB/out/production/LWB/DedicatedOutgoingSocket.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWB/out/production/LWB/LWB.class" beforeDir="false" afterPath="$PROJECT_DIR$/../LWB/out/production/LWB/LWB.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWB/src/AnalogueComms.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LWB/src/AnalogueComms.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWB/src/CheckCriticalZone.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LWB/src/CheckCriticalZone.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWB/src/DedicatedIncomingSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LWB/src/DedicatedIncomingSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWB/src/DedicatedOutgoingSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LWB/src/DedicatedOutgoingSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWB/src/LWB.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LWB/src/LWB.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +53,7 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
-  <component name="RunManager" selected="Application.LWA3">
+  <component name="RunManager" selected="Application.LWA2">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="WIDTH" value="400" />
       <option name="HEIGHT" value="300" />
@@ -52,7 +62,6 @@
       <method />
     </configuration>
     <configuration name="LWA1" type="Application" factoryName="Application">
-      <output_file path="$PROJECT_DIR$/../LWA1 output" is_save="true" />
       <option name="MAIN_CLASS_NAME" value="main" />
       <module name="LWA" />
       <option name="PROGRAM_PARAMETERS" value="LWA1 44444 55555 55556 55557 TIME_STAMP_LWA1 1" />
@@ -61,7 +70,6 @@
       </method>
     </configuration>
     <configuration name="LWA2" type="Application" factoryName="Application">
-      <output_file path="$PROJECT_DIR$/../LWA2 output" is_save="true" />
       <option name="MAIN_CLASS_NAME" value="main" />
       <module name="LWA" />
       <option name="PROGRAM_PARAMETERS" value="LWA2 44444 55556 55555 55557 TIME_STAMP_LWA2 2" />
@@ -70,7 +78,6 @@
       </method>
     </configuration>
     <configuration name="LWA3" type="Application" factoryName="Application">
-      <output_file path="$PROJECT_DIR$/../LWA3 output" is_save="true" />
       <option name="MAIN_CLASS_NAME" value="main" />
       <module name="LWA" />
       <option name="PROGRAM_PARAMETERS" value="LWA3 44444 55557 55555 55556 TIME_STAMP_LWA3 3" />
@@ -165,38 +172,42 @@
     <option name="LAST_COMMIT_MESSAGE" value="Modificada la LinkedList de les requests de Lamport per una CopyOnWriteArrayList, que fa una copia per sota del array amb el que es treballa i evita que diversos threads causin una ConcurrentModificationException. La JVM s'encarrega de sincronitzar les copies per si sola." />
   </component>
   <component name="WindowStateProjectService">
-    <state x="142" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1603821821570">
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603911865383">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="142" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1603821821570" />
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1603911865383" />
+    <state x="142" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1603910793744">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="142" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1603910793744" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1603736971709">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1603736971709" />
-    <state width="1493" height="565" key="GridCell.Tab.0.bottom" timestamp="1603820837475">
+    <state width="1493" height="518" key="GridCell.Tab.0.bottom" timestamp="1603911729827">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="565" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1603820837475" />
-    <state width="1493" height="565" key="GridCell.Tab.0.center" timestamp="1603820837475">
+    <state width="1493" height="518" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1603911729827" />
+    <state width="1493" height="518" key="GridCell.Tab.0.center" timestamp="1603911729827">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="565" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1603820837475" />
-    <state width="1493" height="565" key="GridCell.Tab.0.left" timestamp="1603820837475">
+    <state width="1493" height="518" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1603911729827" />
+    <state width="1493" height="518" key="GridCell.Tab.0.left" timestamp="1603911729827">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="565" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1603820837475" />
-    <state width="1493" height="565" key="GridCell.Tab.0.right" timestamp="1603820837475">
+    <state width="1493" height="518" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1603911729827" />
+    <state width="1493" height="518" key="GridCell.Tab.0.right" timestamp="1603911729827">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="565" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1603820837475" />
+    <state width="1493" height="518" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1603911729827" />
     <state x="249" y="0" key="SettingsEditor" timestamp="1603820891231">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1603820891231" />
-    <state x="478" y="145" width="579" height="534" key="find.popup" timestamp="1603818233607">
+    <state x="478" y="145" width="579" height="534" key="find.popup" timestamp="1603911786161">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="478" y="145" width="579" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1603818233607" />
+    <state x="478" y="145" width="579" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1603911786161" />
     <state x="425" y="187" key="run.anything.popup" timestamp="1603819033373">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
