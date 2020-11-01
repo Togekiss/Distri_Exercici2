@@ -7,18 +7,16 @@ import java.util.LinkedList;
 
 
 public class DedicatedIncomingSocket implements Runnable {
-    private static String process;
-
-    private Socket socket;
+    private final Socket socket;
     private DataInputStream diStream;
     private DataOutputStream doStream;
 
-    private final AnalogueComms parent;
-    private int id;
+    private final AnalogueComms analogueComms;
+    private final int id;
 
     public DedicatedIncomingSocket(Socket socket, AnalogueComms analogueComms, int id) {
         this.socket = socket;
-        this.parent = analogueComms;
+        this.analogueComms = analogueComms;
         this.id = id;
     }
 
@@ -33,9 +31,7 @@ public class DedicatedIncomingSocket implements Runnable {
 
         while (true){
             try {
-                System.out.println("\t\t\t\tWaiting for an incoming msg...");
                 String request = diStream.readUTF();
-                System.out.println("\t\t\t\tGot the request: " + request );
                 actOnRequest(request);
             } catch (SocketException se){
                 se.printStackTrace();
@@ -52,27 +48,28 @@ public class DedicatedIncomingSocket implements Runnable {
         int id;
         switch (request){
             case "LAMPORT REQUEST":
-                process = diStream.readUTF();
+                String process = diStream.readUTF();
                 clock = diStream.readInt();
                 id = diStream.readInt();
-                parent.addToQueue(clock, process, id);
+                analogueComms.addToQueue(clock, process, id);
 
-                clock = getMyRequestedClock(process);
-                doStream.writeInt(clock);
+                //clock = getMyRequestedClock(process);
+                doStream.writeInt(analogueComms.getClock());
                 doStream.writeInt(this.id);
+                analogueComms.updateClock(clock);
+                analogueComms.increaseClock();
                 break;
 
             case "RELEASE":
                 String releaseProcess = diStream.readUTF();
-                System.out.println("\t\t\t\tReleasing process " + releaseProcess +  "...");
-                parent.releaseRequest(releaseProcess);
-                parent.myNotify();
+                analogueComms.releaseRequest(releaseProcess);
+                analogueComms.myNotify();
                 break;
         }
     }
 
     private synchronized int getMyRequestedClock(String process) {
-        LinkedList<LamportRequest> lamportRequest = parent.getLamportQueue();
+        LinkedList<LamportRequest> lamportRequest = analogueComms.getLamportQueue();
         for (LamportRequest l : lamportRequest){
             if (l.getProcess().equals(process)){
                 return l.getClock();

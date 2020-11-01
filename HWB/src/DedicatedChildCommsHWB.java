@@ -5,11 +5,11 @@ import java.net.Socket;
 import java.net.SocketException;
 
 public class DedicatedChildCommsHWB extends Thread{
-    private Socket socket;
+    private final Socket socket;
     private DataInputStream diStream;
     private DataOutputStream doStream;
 
-    private ChildCommsHWB parent;
+    private final ChildCommsHWB parent;
 
 
     public DedicatedChildCommsHWB(Socket socket, ChildCommsHWB childCommsHWB) {
@@ -28,7 +28,6 @@ public class DedicatedChildCommsHWB extends Thread{
 
         while (true){
             try {
-                System.out.println("Waiting to read request...");
                 String request = diStream.readUTF();
                 actOnRequest(request);
             } catch (SocketException se){
@@ -48,17 +47,10 @@ public class DedicatedChildCommsHWB extends Thread{
                 System.out.println("Got ONLINE call from: " + childName);
                 parent.interconnectChilds(childName);
                 break;
+
             case "LWB DONE":
                 childName = diStream.readUTF();
-                System.out.println("notify done in HWB from " + childName);
                 parent.setChildDone(childName);
-                break;
-            case "RUN STATUS":
-                //doStream.writeBoolean(parent.childsDoneStatus());
-                boolean status = parent.childsDoneStatus();
-                if (!status){
-                    doStream.writeBoolean(parent.childsDoneStatus());
-                }
                 break;
         }
     }
@@ -74,7 +66,7 @@ public class DedicatedChildCommsHWB extends Thread{
 
     public void work() {
         try {
-            System.out.println("Sending work");
+            System.out.println("Sending work to childs.");
             doStream.writeUTF("WORK");
         } catch (IOException e) {
             e.printStackTrace();

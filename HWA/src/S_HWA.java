@@ -11,7 +11,7 @@ public class S_HWA implements Runnable {
     private final static int OUTGOING_PORT = 33334;
     private final static String TOKEN_B = "TOKEN_B";
     private final static String TOKEN_A = "TOKEN_A";
-    private ChildCommsHWA childCommsHWA;
+    private final ChildCommsHWA childCommsHWA;
 
     private DataInputStream diStream;
     private DataOutputStream doStream;
@@ -38,6 +38,8 @@ public class S_HWA implements Runnable {
         createOutcomeConnection();
         createIncomeConnection();
         //handShake();
+        System.out.println("Waiting for childs to connect...\n");
+
         while (true){
             readFromHWB();
             try {
@@ -53,7 +55,7 @@ public class S_HWA implements Runnable {
         try {
             String read = diStream.readUTF();
             if (read.equals(TOKEN_B)) {
-                System.out.println("I'm A (work time for me). I received the following message: " + read);
+                System.out.println("I received the following token: " + read);
                 childCommsHWA.childsWork();
             }else {
                 readFromHWB();
@@ -78,7 +80,6 @@ public class S_HWA implements Runnable {
             ServerSocket serverSocket = new ServerSocket(INCOME_PORT);
             //esperem a la conexio del HeavyWeight_B
             Socket incomeSocket = serverSocket.accept();
-            //generaNouServidorDedicat(socket);
             diStream = new DataInputStream(incomeSocket.getInputStream());
 
         } catch (IOException e) {

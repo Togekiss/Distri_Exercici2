@@ -4,28 +4,35 @@ import java.net.Socket;
 import java.util.LinkedList;
 
 public class AnalogueComms extends Thread {
-    private int MY_PORT;
+    private final int MY_PORT;
     private final LWB lwb;
-    private String time_stamp_lwb;
-    private LinkedList<LamportRequest> lamportQueue;
+    private final LinkedList<LamportRequest> lamportQueue;
+    private LamportRequest myRequest;
 
     private DedicatedOutgoingSocket dedicatedOutgoing;
-    private DedicatedIncomingSocket dedicatedLWB;
 
-    private String process;
-    private int id;
-    private CheckCriticalZone checkCriticalZone;
+    private final String process;
+    private final int id;
+    private final CheckCriticalZone checkCriticalZone;
     private int clock;
 
-    public AnalogueComms(LWB lwb, int myPort, String time_stamp_lwb, int id) {
+    private int connectedBrothers;
+    private int answeredBrothers;
+    private boolean myTurn;
+
+    public AnalogueComms(LWB lwb, int myPort, int id, String process) {
         this.MY_PORT = myPort;
         this.lwb = lwb;
-        this.time_stamp_lwb = time_stamp_lwb;
         this.id = id;
+        this.connectedBrothers = 0;
+        this.answeredBrothers = 0;
+        this.myTurn = true;
         lamportQueue = new LinkedList<>();
-        this.checkCriticalZone = new CheckCriticalZone(this);
+        this.checkCriticalZone = new CheckCriticalZone(this, process);
         checkCriticalZone.start();
         this.clock = 0;
+        this.process = process;
+        myRequest = new LamportRequest(clock, process, id);
     }
 
     @Override
@@ -37,6 +44,7 @@ public class AnalogueComms extends Thread {
             while (true){
                 Socket socket = serverSocket.accept();
                 newDedicatedAnalogueComms(socket);
+                connectedBrothers++;
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -44,7 +52,7 @@ public class AnalogueComms extends Thread {
     }
 
     private synchronized void newDedicatedAnalogueComms(Socket socket) {
-        dedicatedLWB = new DedicatedIncomingSocket(socket, this, id);
+        DedicatedIncomingSocket dedicatedLWB = new DedicatedIncomingSocket(socket, this, id);
         Thread thread = new Thread(dedicatedLWB);
         thread.start();
     }
@@ -52,28 +60,24 @@ public class AnalogueComms extends Thread {
     public synchronized void addToQueue(int clock, String process, int id) {
         LamportRequest request = new LamportRequest(clock, process, id);
         boolean found = false;
-        for (LamportRequest lr : lamportQueue){
-            if (lr.getProcess().equals(process)){
-                found = true;
-                break;
-            }
-        }
-
-        if (!found){
-            System.out.println("Adding request: " + request.toString());
-            lamportQueue.add(request);
-
-            System.out.println();
+        synchronized (lamportQueue){
             for (LamportRequest lr : lamportQueue){
-                System.out.println("[LAMPORT (add)]" + lr.toString());
+                if (lr.getProcess().equals(process)){
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found){
+                lamportQueue.add(request);
             }
         }
     }
 
-    public synchronized void releaseProcess(String tmstp) throws IOException {
-        System.out.println("### sending release msg to dedicatedOutgoing ### " + tmstp);
-        dedicatedOutgoing.releaseCS(tmstp);
-        releaseRequest(tmstp);
+    public synchronized void releaseProcess(String process) throws IOException {
+        dedicatedOutgoing.releaseCS(process);
+        releaseRequest(process);
+        myRequest = new LamportRequest(clock, this.process, id);
         dedicatedOutgoing.myNotify();
         lwb.waitForResume();
     }
@@ -86,17 +90,19 @@ public class AnalogueComms extends Thread {
         synchronized (lamportQueue){
             lamportQueue.removeIf(lr -> lr.getProcess().equals(releaseProcess));
         }
-        System.out.println();
-        for (LamportRequest lr : lamportQueue){
-            System.out.println("[LAMPORT (remove)]" + lr.toString());
-        }
     }
 
-    public synchronized void gotAnswer(String process, int clock) {
-        this.process = process;
-        this.clock = clock;
-        System.out.println("\tGot answer. Checking queue");
-        myNotify();
+    public synchronized void checkAnswers(int clock, int id) {
+        answeredBrothers++;
+        if (clock <= this.clock  && id < this.id){
+            myTurn = false;
+        }
+
+        if (answeredBrothers == connectedBrothers && myTurn){
+            System.out.println("answer true");
+            myTurn = true;
+            myNotify();
+        }
     }
 
     public void myNotify() {
@@ -104,23 +110,29 @@ public class AnalogueComms extends Thread {
     }
 
     public LinkedList<LamportRequest> getLamportQueue() {
-        return lamportQueue;
-    }
-
-    public String getProcess() {
-        return process;
+        synchronized (lamportQueue){
+            return lamportQueue;
+        }
     }
 
     public int getClock() {
         return clock;
     }
 
-    public int getTheId() {
-        return id;
-    }
-
     public void useScreen(){
         lwb.useScreen();
+        increaseClock();
+    }
+
+    public void increaseClock(){
         clock++;
+    }
+
+    public void updateClock(int clock) {
+        this.clock = Math.max(clock, this.clock);
+    }
+
+    public LamportRequest getMyRequest() {
+        return myRequest;
     }
 }

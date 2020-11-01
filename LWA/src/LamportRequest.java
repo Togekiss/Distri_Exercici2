@@ -1,15 +1,15 @@
 public class LamportRequest {
-    private int clock;
+    private Integer clock;
     private String process;
     private int id;
 
-    public LamportRequest(int clock, String process, int id){
+    public LamportRequest(Integer clock, String process, int id){
         this.clock = clock;
         this.process = process;
         this.id = id;
     }
 
-    public int getClock() {
+    public Integer getClock() {
         return clock;
     }
 

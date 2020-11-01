@@ -5,20 +5,16 @@ import java.net.InetAddress;
 import java.net.Socket;
 
 public class DedicatedOutgoingSocket extends Thread {
-    private int OUTGOING_PORT;
-
-    private Socket socket;
     private DataInputStream diStream;
     private DataOutputStream doStream;
 
-    private AnalogueComms analogueComms;
-    private String process;
+    private final AnalogueComms analogueComms;
+    private final String process;
     private int clock;
-    private int id;
+    private final int id;
 
-    public DedicatedOutgoingSocket(LWB LWB, int outgoing_port, String tmstp, AnalogueComms analogueComms, int id) {
-        OUTGOING_PORT = outgoing_port;
-        process = tmstp;
+    public DedicatedOutgoingSocket(int outgoing_port, String process, AnalogueComms analogueComms, int id) {
+        this.process = process;
         this.analogueComms = analogueComms;
         this.id = id;
         clock = analogueComms.getClock();
@@ -27,12 +23,9 @@ public class DedicatedOutgoingSocket extends Thread {
             InetAddress iAddress = InetAddress.getLocalHost();
             String IP = iAddress.getHostAddress();
 
-            socket = new Socket(String.valueOf(IP), OUTGOING_PORT);
+            Socket socket = new Socket(String.valueOf(IP), outgoing_port);
             doStream = new DataOutputStream(socket.getOutputStream());
             diStream = new DataInputStream(socket.getInputStream());
-
-            //long requestTime = sendRequest();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -43,9 +36,7 @@ public class DedicatedOutgoingSocket extends Thread {
         while (true){
             try {
                 synchronized (this){
-                    System.out.println("Pre waited in dedicatedOutgoing");
                     this.wait();
-                    System.out.println("Post waited in dedicatedOutgoing");
                 }
                 sendRequest();
             } catch (IOException | InterruptedException e) {
@@ -54,10 +45,9 @@ public class DedicatedOutgoingSocket extends Thread {
         }
     }
 
-    public void releaseCS(String tmstp) throws IOException {
-        System.out.println("\tRealeasing " + tmstp + " in releaseCS");
+    public void releaseCS(String process) throws IOException {
         doStream.writeUTF("RELEASE");
-        doStream.writeUTF(tmstp);
+        doStream.writeUTF(process);
     }
 
 
@@ -68,7 +58,7 @@ public class DedicatedOutgoingSocket extends Thread {
         doStream.writeInt(clock);
         doStream.writeInt(id);
         analogueComms.addToQueue(clock, process, id);
-
+        analogueComms.increaseClock();
         try {
             waitRequestResponse();
         } catch (IOException e) {
@@ -80,12 +70,11 @@ public class DedicatedOutgoingSocket extends Thread {
     private void waitRequestResponse() throws IOException {
         //wait for request response
         int clock = diStream.readInt();
+        int id = diStream.readInt();
 
-        int firstId = diStream.readInt();
-        //System.out.println("\t[SENDER - RECEIVED] Timestamp[" + responseTime + "] and ID[" + firstId + "]");
-        //System.out.println("\t[SENDER - RECEIVED] ID: " + firstId);
-
-        analogueComms.gotAnswer(process, clock);
+        analogueComms.updateClock(clock);
+        analogueComms.increaseClock();
+        analogueComms.checkAnswers(clock, id);
     }
 
     public void myNotify() {

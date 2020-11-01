@@ -4,31 +4,30 @@ import java.io.IOException;
 import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class LWB extends Thread {
-    private int OUTGOING_HWB_PORT;
-    private int OUTGOING_PORT;
-    private String TMSTP;
+    private final int OUTGOING_HWB_PORT;
+    private final int OUTGOING_PORT;
 
-    private Socket socketHWB;
     private DataInputStream diStreamHWB;
     private DataOutputStream doStreamHWB;
 
-    private AnalogueComms analogueComms;
-    private int id;
-    private String className;
+    private final AnalogueComms analogueComms;
+    private final int id;
+    private final String process;
 
-    private ArrayList<DedicatedOutgoingSocket> dedicatedOutgoingSocketArrayList;
+    private final ArrayList<DedicatedOutgoingSocket> dedicatedOutgoingSocketArrayList;
 
-    public LWB(String className, int outgoingHwbPort, int myPort, int outgoingPort, String time_stamp_lwb, int id){
+    public LWB(String process, int outgoingHwbPort, int myPort, int outgoingPort, int id){
         this.OUTGOING_HWB_PORT = outgoingHwbPort;
         this.OUTGOING_PORT = outgoingPort;
         this.id = id;
-        this.className = className;
-        this.TMSTP = time_stamp_lwb;
+        this.process = process;
         dedicatedOutgoingSocketArrayList = new ArrayList<>();
-        analogueComms = new AnalogueComms(this, myPort, time_stamp_lwb, id);
+        analogueComms = new AnalogueComms(this, myPort, id, process);
         analogueComms.start();
     }
 
@@ -37,19 +36,19 @@ public class LWB extends Thread {
         try {
             connectToParent();
             doStreamHWB.writeUTF("ONLINE");
-            doStreamHWB.writeUTF(className);
+            doStreamHWB.writeUTF(process);
             boolean connect = diStreamHWB.readBoolean();
 
             if (connect){
-                DedicatedOutgoingSocket dedicatedOutgoing = new DedicatedOutgoingSocket(this, OUTGOING_PORT, TMSTP, analogueComms, id);
+                DedicatedOutgoingSocket dedicatedOutgoing = new DedicatedOutgoingSocket(OUTGOING_PORT, process, analogueComms, id);
                 dedicatedOutgoing.start();
                 dedicatedOutgoingSocketArrayList.add(dedicatedOutgoing);
                 analogueComms.registerDedicated(dedicatedOutgoing);
             }
             String message = diStreamHWB.readUTF();
+            System.out.println("Got this message: " + message);
 
             if (message.equals("WORK")){
-                System.out.println("Got work");
                 for (DedicatedOutgoingSocket dedicatedOut : dedicatedOutgoingSocketArrayList) {
                     dedicatedOut.myNotify();
                 }
@@ -62,21 +61,24 @@ public class LWB extends Thread {
 
     public synchronized void useScreen() {
         for (int i = 0; i < 10; i++){
-            System.out.println("\tSoc el procés lightweight " + TMSTP);
+            System.out.println("\tSoc el procés lightweight " + process);
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        System.out.println(formatter.format(calendar.getTime()));
+        System.out.println("... (" + analogueComms.getClock() + ") ...");
 
         try {
             doStreamHWB.writeUTF("LWB DONE");
-            doStreamHWB.writeUTF(className);
+            doStreamHWB.writeUTF(process);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("finished useScreen?");
     }
 
 
@@ -84,17 +86,15 @@ public class LWB extends Thread {
         InetAddress iAddress = InetAddress.getLocalHost();
         String IP = iAddress.getHostAddress();
 
-        System.out.println(className + " connecting to parent");
-        socketHWB = new Socket(String.valueOf(IP), OUTGOING_HWB_PORT);
+        System.out.println(process + " connecting to parent...");
+        Socket socketHWB = new Socket(String.valueOf(IP), OUTGOING_HWB_PORT);
         doStreamHWB = new DataOutputStream(socketHWB.getOutputStream());
         diStreamHWB = new DataInputStream(socketHWB.getInputStream());
     }
 
     public void waitForResume() {
         try {
-            System.out.println("waiting for HWB's response to resume");
-            String aux = diStreamHWB.readUTF();
-            System.out.println("I read: " + aux);
+            diStreamHWB.readUTF();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -16,7 +16,7 @@ public class S_HWB extends Thread{
     private DataOutputStream doStream;
     private Socket outSocket;
 
-    private ChildCommsHWB childCommsHWB;
+    private final ChildCommsHWB childCommsHWB;
 
     public S_HWB(){
         childCommsHWB = new ChildCommsHWB(this);
@@ -53,10 +53,9 @@ public class S_HWB extends Thread{
 
     private void readFromHWA() {
         try {
-            System.out.println("Waiting for a message from HWA...");
             String read = diStream.readUTF();
             if (read.equals(TOKEN_A)) {
-                System.out.println("I'm B. I received the following message: " + read);
+                System.out.println("I received the following token: " + read);
                 childCommsHWB.childsWork();
             }else {
                 readFromHWA();
@@ -68,7 +67,7 @@ public class S_HWB extends Thread{
 
     private void writeToHWA() {
         try {
-            System.out.println("Writing token to A");
+            System.out.println("Sending token to B.");
             doStream.writeUTF(TOKEN_B);
         } catch (IOException e) {
             e.printStackTrace();

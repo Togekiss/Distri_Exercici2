@@ -3,19 +3,39 @@
   <component name="ChangeListManager">
     <list default="true" id="dc014dc3-a8cf-4ec0-8687-63fff6a5424a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../HWA/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../HWA/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HWA/out/production/HWA/ChildCommsHWA.class" beforeDir="false" afterPath="$PROJECT_DIR$/../HWA/out/production/HWA/ChildCommsHWA.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HWA/out/production/HWA/DedicatedChildCommsHWA.class" beforeDir="false" afterPath="$PROJECT_DIR$/../HWA/out/production/HWA/DedicatedChildCommsHWA.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HWA/out/production/HWA/S_HWA.class" beforeDir="false" afterPath="$PROJECT_DIR$/../HWA/out/production/HWA/S_HWA.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HWA/src/ChildCommsHWA.java" beforeDir="false" afterPath="$PROJECT_DIR$/../HWA/src/ChildCommsHWA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HWA/src/DedicatedChildCommsHWA.java" beforeDir="false" afterPath="$PROJECT_DIR$/../HWA/src/DedicatedChildCommsHWA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HWA/src/S_HWA.java" beforeDir="false" afterPath="$PROJECT_DIR$/../HWA/src/S_HWA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LWA/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../LWA/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LWA/out/production/LWA/AnalogueComms.class" beforeDir="false" afterPath="$PROJECT_DIR$/../LWA/out/production/LWA/AnalogueComms.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LWA/out/production/LWA/CheckCriticalZone.class" beforeDir="false" afterPath="$PROJECT_DIR$/../LWA/out/production/LWA/CheckCriticalZone.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LWA/out/production/LWA/DedicatedIncomingSocket.class" beforeDir="false" afterPath="$PROJECT_DIR$/../LWA/out/production/LWA/DedicatedIncomingSocket.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LWA/out/production/LWA/DedicatedOutgoingSocket.class" beforeDir="false" afterPath="$PROJECT_DIR$/../LWA/out/production/LWA/DedicatedOutgoingSocket.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LWA/out/production/LWA/LWA.class" beforeDir="false" afterPath="$PROJECT_DIR$/../LWA/out/production/LWA/LWA.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWA/out/production/LWA/LamportRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/../LWA/out/production/LWA/LamportRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWA/out/production/LWA/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../LWA/out/production/LWA/main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LWA/src/AnalogueComms.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LWA/src/AnalogueComms.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LWA/src/CheckCriticalZone.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LWA/src/CheckCriticalZone.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LWA/src/DedicatedIncomingSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LWA/src/DedicatedIncomingSocket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LWA/src/DedicatedOutgoingSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LWA/src/DedicatedOutgoingSocket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LWA/src/LWA.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LWA/src/LWA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWA/src/LamportRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LWA/src/LamportRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWA/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LWA/src/main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LWB/out/production/LWB/AnalogueComms.class" beforeDir="false" afterPath="$PROJECT_DIR$/../LWB/out/production/LWB/AnalogueComms.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWB/out/production/LWB/CheckCriticalZone.class" beforeDir="false" afterPath="$PROJECT_DIR$/../LWB/out/production/LWB/CheckCriticalZone.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWB/out/production/LWB/DedicatedIncomingSocket.class" beforeDir="false" afterPath="$PROJECT_DIR$/../LWB/out/production/LWB/DedicatedIncomingSocket.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWB/out/production/LWB/DedicatedOutgoingSocket.class" beforeDir="false" afterPath="$PROJECT_DIR$/../LWB/out/production/LWB/DedicatedOutgoingSocket.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWB/out/production/LWB/LWB.class" beforeDir="false" afterPath="$PROJECT_DIR$/../LWB/out/production/LWB/LWB.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWB/out/production/LWB/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../LWB/out/production/LWB/main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LWB/src/AnalogueComms.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LWB/src/AnalogueComms.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWB/src/CheckCriticalZone.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LWB/src/CheckCriticalZone.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWB/src/DedicatedIncomingSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LWB/src/DedicatedIncomingSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWB/src/DedicatedOutgoingSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LWB/src/DedicatedOutgoingSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWB/src/LWB.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LWB/src/LWB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LWB/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LWB/src/main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +75,6 @@
       <method />
     </configuration>
     <configuration name="HWB" type="Application" factoryName="Application" temporary="true">
-      <output_file path="$PROJECT_DIR$/../../../../test/TestOutput.txt" is_save="true" />
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="HeavyWeightB" />
       <method v="2">
@@ -141,32 +160,53 @@
     <option name="LAST_COMMIT_MESSAGE" value="Moficat el HWB per a que es comporti com HWA, amb les mateixes comunicacions i caracteristiques. Pendent de que el HWB inicii els seus fills al rebre el token de HWA, evitant que els fill s'iniciin al estar tots conectats com LWA ja que si no es solapen al començar (tot i que al acabar respecten el token)." />
   </component>
   <component name="WindowStateProjectService">
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604254186419">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1604254186419" />
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1603822686561">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1603822686561" />
-    <state width="1493" height="300" key="GridCell.Tab.0.bottom" timestamp="1603914886147">
+    <state width="1493" height="300" key="GridCell.Tab.0.bottom" timestamp="1604257533558">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="300" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1603914886147" />
-    <state width="1493" height="300" key="GridCell.Tab.0.center" timestamp="1603914886147">
+    <state width="1493" height="300" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1604257533558" />
+    <state width="1493" height="300" key="GridCell.Tab.0.center" timestamp="1604257533558">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="300" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1603914886147" />
-    <state width="1493" height="300" key="GridCell.Tab.0.left" timestamp="1603914886147">
+    <state width="1493" height="300" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1604257533558" />
+    <state width="1493" height="300" key="GridCell.Tab.0.left" timestamp="1604257533558">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="300" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1603914886147" />
-    <state width="1493" height="300" key="GridCell.Tab.0.right" timestamp="1603914886147">
+    <state width="1493" height="300" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1604257533558" />
+    <state width="1493" height="300" key="GridCell.Tab.0.right" timestamp="1604257533558">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="300" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1603914886147" />
-    <state x="478" y="145" width="579" height="534" key="find.popup" timestamp="1603912743604">
+    <state width="1493" height="300" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1604257533558" />
+    <state width="1493" height="252" key="GridCell.Tab.1.bottom" timestamp="1604255688012">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="478" y="145" width="579" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1603912743604" />
+    <state width="1493" height="252" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1604255688012" />
+    <state width="1493" height="252" key="GridCell.Tab.1.center" timestamp="1604255688012">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="252" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1604255688012" />
+    <state width="1493" height="252" key="GridCell.Tab.1.left" timestamp="1604255688012">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="252" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1604255688012" />
+    <state width="1493" height="252" key="GridCell.Tab.1.right" timestamp="1604255688012">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="252" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1604255688012" />
+    <state x="478" y="145" width="579" height="534" key="find.popup" timestamp="1604076638644">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="478" y="145" width="579" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1604076638644" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/HWB$HWB.ic" NAME="HWB Coverage Results" MODIFIED="1604083631198" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/HeavyWeightB$main.ic" NAME="main Coverage Results" MODIFIED="1585824568360" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/HeavyWeightB$HWB.ic" NAME="HWB Coverage Results" MODIFIED="1589276406671" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>

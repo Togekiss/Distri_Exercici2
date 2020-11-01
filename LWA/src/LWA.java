@@ -4,29 +4,28 @@ import java.io.IOException;
 import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class LWA extends Thread {
-    private int OUTGOING_HWA_PORT;
-    private int FIRST_OUTGOING_PORT;
-    private int SECOND_OUTGOING_PORT;
-    private String TMSTP;
+    private final int OUTGOING_HWA_PORT;
+    private final int FIRST_OUTGOING_PORT;
+    private final int SECOND_OUTGOING_PORT;
 
-    private Socket socketHWA;
     private DataInputStream diStreamHWA;
     private DataOutputStream doStreamHWA;
 
-    private AnalogueComms analogueComms;
-    private int id;
-    private String className;
+    private final AnalogueComms analogueComms;
+    private final int id;
+    private final String process;
 
-    public LWA(String className, int outgoingHwaPort, int myPort, int firstOutgoingPort, int secondOutgoingPort, String time_stamp_lwa, int id){
+    public LWA(String process, int outgoingHwaPort, int myPort, int firstOutgoingPort, int secondOutgoingPort, int id){
         this.OUTGOING_HWA_PORT = outgoingHwaPort;
         this.FIRST_OUTGOING_PORT = firstOutgoingPort;
         this.SECOND_OUTGOING_PORT = secondOutgoingPort;
         this.id = id;
-        this.className = className;
-        this.TMSTP = time_stamp_lwa;
-        analogueComms = new AnalogueComms(this, myPort, time_stamp_lwa, id);
+        this.process = process;
+        analogueComms = new AnalogueComms(this, myPort, id, process);
         analogueComms.start();
     }
 
@@ -35,13 +34,13 @@ public class LWA extends Thread {
         try {
             connectToParent();
             doStreamHWA.writeUTF("ONLINE");
-            doStreamHWA.writeUTF(className);
+            doStreamHWA.writeUTF(process);
             boolean connect = diStreamHWA.readBoolean();
 
             if (connect){
-                DedicatedOutgoingSocket firstDedicatedOutgoing = new DedicatedOutgoingSocket(this, FIRST_OUTGOING_PORT, TMSTP, analogueComms, id);
+                DedicatedOutgoingSocket firstDedicatedOutgoing = new DedicatedOutgoingSocket(FIRST_OUTGOING_PORT, process, analogueComms, id);
                 firstDedicatedOutgoing.start();
-                DedicatedOutgoingSocket secondDedicatedOutgoing = new DedicatedOutgoingSocket(this, SECOND_OUTGOING_PORT, TMSTP, analogueComms, id);
+                DedicatedOutgoingSocket secondDedicatedOutgoing = new DedicatedOutgoingSocket(SECOND_OUTGOING_PORT, process, analogueComms, id);
                 secondDedicatedOutgoing.start();
                 analogueComms.registerDedicated(firstDedicatedOutgoing, secondDedicatedOutgoing);
             }
@@ -53,22 +52,25 @@ public class LWA extends Thread {
 
     public synchronized void useScreen() {
         for (int i = 0; i < 10; i++){
-            System.out.println("\tSoc el procés lightweight " + TMSTP);
+            System.out.println("\tSoc el procés lightweight " + process);
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        System.out.println(formatter.format(calendar.getTime()));
+        System.out.println("... (" + analogueComms.getClock() + ") ...");
 
         try {
             doStreamHWA.writeUTF("LWA DONE");
-            doStreamHWA.writeUTF(className);
+            doStreamHWA.writeUTF(process);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("finished useScreen?");
     }
 
 
@@ -76,17 +78,15 @@ public class LWA extends Thread {
         InetAddress iAddress = InetAddress.getLocalHost();
         String IP = iAddress.getHostAddress();
 
-        System.out.println(className + " connecting to parent");
-        socketHWA = new Socket(String.valueOf(IP), OUTGOING_HWA_PORT);
+        System.out.println(process + " connecting to parent...");
+        Socket socketHWA = new Socket(String.valueOf(IP), OUTGOING_HWA_PORT);
         doStreamHWA = new DataOutputStream(socketHWA.getOutputStream());
         diStreamHWA = new DataInputStream(socketHWA.getInputStream());
     }
 
     public void waitForResume() {
         try {
-            System.out.println("waiting for HWA's response to resume");
-            String aux = diStreamHWA.readUTF();
-            System.out.println("I read: " + aux);
+            diStreamHWA.readUTF();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -12,13 +12,12 @@ public class ChildCommsHWA extends Thread {
     private boolean LWA1Executed;
     private boolean LWA2Executed;
     private boolean LWA3Executed;
-
-    private S_HWA parent;
-    private ArrayList<DedicatedChildCommsHWA> dedicatedChildCommsList;
-
     private final static String LWA1 = "LWA1";
     private final static String LWA2 = "LWA2";
     private final static String LWA3 = "LWA3";
+
+    private final S_HWA parent;
+    private final ArrayList<DedicatedChildCommsHWA> dedicatedChildCommsList;
 
     public ChildCommsHWA(S_HWA s_hwa) {
         LWA1Online = false;
@@ -45,7 +44,7 @@ public class ChildCommsHWA extends Thread {
     }
 
     private void newDedicatedChildComms(Socket socket) {
-        DedicatedChildCommsHWA dedicatedChildCommsHWA = new DedicatedChildCommsHWA(socket/*, s_hwa*/, this);
+        DedicatedChildCommsHWA dedicatedChildCommsHWA = new DedicatedChildCommsHWA(socket, this);
         dedicatedChildCommsHWA.start();
         dedicatedChildCommsList.add(dedicatedChildCommsHWA);
     }
@@ -60,22 +59,42 @@ public class ChildCommsHWA extends Thread {
         switch (childName) {
             case LWA1:
                 LWA1Executed = true;
-                System.out.println("LWA1 executed to true");
+                System.out.println("LWA1 executed.");
                 break;
 
             case LWA2:
                 LWA2Executed = true;
-                System.out.println("LWA2 executed to true");
+                System.out.println("LWA2 executed.");
                 break;
 
             case LWA3:
                 LWA3Executed = true;
-                System.out.println("LWA3 executed to true");
+                System.out.println("LWA3 executed.");
                 break;
         }
         if (LWA1Executed && LWA2Executed && LWA3Executed){
             childsDone();
             LWA1Executed = LWA2Executed = LWA3Executed = false;
+        }
+    }
+
+    public void interconnectChilds(String childName) {
+        switch (childName) {
+            case "LWA1":
+                LWA1Online = true;
+                break;
+
+            case "LWA2":
+                LWA2Online = true;
+                break;
+
+            case "LWA3":
+                LWA3Online = true;
+                break;
+
+        }
+        if (LWA1Online && LWA2Online && LWA3Online){
+            notifyChildrensToConnect();
         }
     }
 

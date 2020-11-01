@@ -5,20 +5,16 @@ import java.net.InetAddress;
 import java.net.Socket;
 
 public class DedicatedOutgoingSocket extends Thread {
-    private int OUTGOING_PORT;
-
-    private Socket socket;
     private DataInputStream diStream;
     private DataOutputStream doStream;
 
-    private AnalogueComms analogueComms;
-    private String process;
-    private int clock;
-    private int id;
+    private final AnalogueComms analogueComms;
+    private final String process;
+    private Integer clock;
+    private final int id;
 
-    public DedicatedOutgoingSocket(LWA _lwa, int outgoing_port, String tmstp, AnalogueComms analogueComms, int id) {
-        OUTGOING_PORT = outgoing_port;
-        process = tmstp;
+    public DedicatedOutgoingSocket(int outgoing_port, String process, AnalogueComms analogueComms, int id) {
+        this.process = process;
         this.analogueComms = analogueComms;
         this.id = id;
         clock = analogueComms.getClock();
@@ -27,15 +23,13 @@ public class DedicatedOutgoingSocket extends Thread {
             InetAddress iAddress = InetAddress.getLocalHost();
             String IP = iAddress.getHostAddress();
 
-            socket = new Socket(String.valueOf(IP), OUTGOING_PORT);
+            Socket socket = new Socket(String.valueOf(IP), outgoing_port);
             doStream = new DataOutputStream(socket.getOutputStream());
             diStream = new DataInputStream(socket.getInputStream());
-
-            //long requestTime = sendRequest();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     @Override
@@ -52,36 +46,19 @@ public class DedicatedOutgoingSocket extends Thread {
         }
     }
 
-    public void releaseCS(String tmstp) throws IOException {
-        System.out.println("\tRealeasing " + tmstp + " in releaseCS");
+    public void releaseCS(String process) throws IOException {
         doStream.writeUTF("RELEASE");
-        doStream.writeUTF(tmstp);
+        doStream.writeUTF(process);
     }
 
 
     public void sendRequest() throws IOException {
         doStream.writeUTF("LAMPORT REQUEST");
-        doStream.writeUTF(process);
-        //System.out.println("\t[SENDING] Timestamp: " + TMSTP);
-
-        clock = analogueComms.getClock();
-        doStream.writeInt(clock);
-        //System.out.println("\t[SENDING] Time: " + time);
-
-        doStream.writeInt(id);
-        //System.out.println("\t[SENDING] ID: " + id);
-
+        doStream.writeUTF(analogueComms.getMyRequest().getProcess());
+        doStream.writeInt(analogueComms.getMyRequest().getClock());
+        doStream.writeInt(analogueComms.getMyRequest().getId());
         analogueComms.addToQueue(clock, process, id);
-        //System.out.println("\t rip sending end?");
-
-        if (OUTGOING_PORT == 55556){
-            System.out.println("\tSENDING request (timestamp: " + clock + ") to TIME_STAMP_LWA2");
-        }else  if (OUTGOING_PORT == 55557){
-            System.out.println("\tSENDING request (timestamp: " + clock + ") to TIME_STAMP_LWA3");
-        }else  if (OUTGOING_PORT == 55555){
-            System.out.println("\tSENDING request (timestamp: " + clock + ") to TIME_STAMP_LWA1");
-        }
-
+        analogueComms.increaseClock();
         try {
             waitRequestResponse();
         } catch (IOException e) {
@@ -91,31 +68,17 @@ public class DedicatedOutgoingSocket extends Thread {
 
 
     private void waitRequestResponse() throws IOException {
-        //wait for request response
         int clock = diStream.readInt();
+        int id = diStream.readInt();
 
-        int firstId = diStream.readInt();
-        //System.out.println("\t[SENDER - RECEIVED] Timestamp[" + responseTime + "] and ID[" + firstId + "]");
-        //System.out.println("\t[SENDER - RECEIVED] ID: " + firstId);
-
-        analogueComms.checkBothAnswers(process, this.clock, OUTGOING_PORT);
+        analogueComms.updateClock(clock);
+        analogueComms.increaseClock();
+        analogueComms.checkAnswers(clock, id);
     }
 
     public void myNotify() {
         synchronized (this){
             this.notify();
-        }
-    }
-
-    public void myWait() {
-        synchronized (this){
-            try {
-                System.out.println("\tprewait outgoing socket");
-                this.wait();
-                System.out.println("\tpost wait outgoing socket");
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
     }
 }
