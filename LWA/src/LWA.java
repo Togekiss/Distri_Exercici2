@@ -62,7 +62,6 @@ public class LWA extends Thread {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         System.out.println(formatter.format(calendar.getTime()));
-        System.out.println("... (" + analogueComms.getClock() + ") ...");
 
         try {
             doStreamHWA.writeUTF("LWA DONE");

@@ -46,7 +46,6 @@ public class LWB extends Thread {
                 analogueComms.registerDedicated(dedicatedOutgoing);
             }
             String message = diStreamHWB.readUTF();
-            System.out.println("Got this message: " + message);
 
             if (message.equals("WORK")){
                 for (DedicatedOutgoingSocket dedicatedOut : dedicatedOutgoingSocketArrayList) {
@@ -71,7 +70,6 @@ public class LWB extends Thread {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         System.out.println(formatter.format(calendar.getTime()));
-        System.out.println("... (" + analogueComms.getClock() + ") ...");
 
         try {
             doStreamHWB.writeUTF("LWB DONE");

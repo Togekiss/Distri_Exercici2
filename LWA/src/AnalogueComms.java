@@ -69,7 +69,6 @@ public class AnalogueComms extends Thread {
             }
 
             if (!found){
-                System.out.println("Adding to list this request: " + request.toString());
                 lamportQueue.add(request);
             }
         }
@@ -98,13 +97,9 @@ public class AnalogueComms extends Thread {
 
     public synchronized void checkAnswers(int clock, int id) {
         answeredBrothers++;
-        if (clock <= this.clock  && id < this.id){
-            myTurn = false;
-        }
+        myTurn = clock > this.clock || id >= this.id;
 
         if (answeredBrothers == connectedBrothers && myTurn){
-            System.out.println("both answers true");
-            myTurn = true;
             myNotify();
         }
     }
